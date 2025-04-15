@@ -1,1 +1,1 @@
-# My Project
+# gRPC Angular demo
