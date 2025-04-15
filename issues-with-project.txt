@@ -1,0 +1,43 @@
+command: "protoc -I=./protos \
+            ./protos/helloworld.proto \
+            --js_out=import_style=commonjs:./frontend/src/app/grpc \
+            --grpc-web_out=import_style=typescript,mode=grpcwebtext:./frontend/src/app/grpc"
+
+issue: "/bin/zsh /Users/adnanomerovic/Angular/gRPC\ demo/generate-code.sh
+        ➜  gRPC demo /bin/zsh /Users/adnanomerovic/Angular/gRPC\ demo/generate-code.sh
+        /Users/adnanomerovic/Angular/gRPC demo/generate-code.sh:2: command not found: protoc"
+
+solution: "brew install protobuf"
+-------
+generate-code.sh:
+"gRPC demo /bin/zsh /Users/adnanomerovic/Angular/gRPC\ demo/generate-code.sh
+protoc-gen-js: program not found or is not executable
+Please specify a program using absolute path or make sure the program is available in your PATH system variable
+--js_out: protoc-gen-js: Plugin failed with status code 1."
+
+solution: "npm install google-protobuf"
+----
+
+issue with generating code (generate-code.sh):
+"/usr/local/bin/npm run generate-grpc
+
+ > frontend@0.0.0 generate-grpc
+ > ./generate-code.sh
+
+ ./node_modules/.bin/protoc-gen-grpc-web: program not found or is not executable
+ Please specify a program using absolute path or make sure the program is available in your PATH system variable
+ --grpc-web_out: protoc-gen-grpc-web: Plugin failed with status code 1.
+
+ Process finished with exit code 1"
+
+solution: "npm install -g protoc-gen-grpc-web"
+---
+issue: "main.js:12 Uncaught Error: Dynamic require of "google-protobuf" is not supported
+    at main.js:12:9...."
+
+solution:
+angular.json -> {
+//MUST USE WEBPACK INSTEAD OF ESBUILD
+"builder": "@angular-devkit/build-angular:browser",
+"main": "src/main.ts",
+}
